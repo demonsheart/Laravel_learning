@@ -18,5 +18,8 @@ vendor目录： 第三方类库
 artisan文件 代码生成文件
 
 php artisan serve 启动与Apache无关（不推荐）
-
 推荐使用虚拟主机
+
+路由：
+Route::请求方式('URL',匿名函数/控制响应的方法)
+
