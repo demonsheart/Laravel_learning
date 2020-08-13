@@ -3,3 +3,20 @@ laravel特点
 2. 分层思想
 3. ORM操作数据库
 PS: 所有URL访问都必须事先定好路由规则
+
+app目录: 存放项目
+bootstarp目录: 启动
+config目录: 配置
+database目录： migration（创建数据表的类文件） seed(数据填充文件)
+pubic目录：项目入口文件 静态资源文件 （项目单一入口文件，虚拟主机根目录）
+resources：视图文件 语言包文件
+routes目录：定义路由目录 web.php是定义路由的文件
+storage目录：缓存文件、日志文件、后期用户上传文件
+vendor目录： 第三方类库
+
+.env文件 环境配置文件 （config配置一般都是读取.env文件）
+artisan文件 代码生成文件
+
+php artisan serve 启动与Apache无关（不推荐）
+
+推荐使用虚拟主机
