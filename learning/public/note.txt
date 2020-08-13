@@ -20,6 +20,50 @@ artisan文件 代码生成文件
 php artisan serve 启动与Apache无关（不推荐）
 推荐使用虚拟主机
 
-路由：
-Route::请求方式('URL',匿名函数/控制响应的方法)
+路由：(/routes)
+  Route::请求方式('URL', 匿名函数/控制响应的方法);
+       get/post/any
 
+  Route::match([   ], 'URL', 匿名函数/控制响应的方法);
+             请求方法数组
+
+  路由参数的传递通过路由地址中的“{参数名}”传递（必选参数）
+        {参数名?} 可选参数
+
+  Route::any('/test4', function () {
+    echo '<p>Test4-' . $_GET['id'] . '</p>';
+  })->name('名字');//路由别名
+  调用路由：route('名字');
+
+  路由群组：
+  Route::group(公共属性数组, 回调函数);
+
+控制器：(/app/Http/Controllers) 实际上是类
+    命名规则： nameController.php
+    命令： php artisan make:controller 控制器名Controller 关键词
+        ex:php artisan make:controller TestController
+    命名空间三元素：常量 方法 类 （同一级目录不用引入）
+
+    控制器路由：
+    Route::get('/home/test/test1','TestController@test1');
+                  URL                   控制器@方法
+    
+    分目录管理：
+    php artisan make:controller Admin/IndexController
+                                加上目录即可
+    
+接收用户输入：
+    类接收： Illuminate\Support\Facades\Input (可在config/app.php中 在aliases数组配置别名)
+    Input::get('参数名','参数没被传递时使用的默认值')
+    Input::all()  获取所有用户输入
+    Input::get('') 获取单个用户输入
+    Input::only([])  获取指定用户输入
+    Input::except([])  获取除指定用户输入外的所有用户输入
+    Input::has('name') 判断输入参数是否存在
+
+    Request也可接收输入
+
+输出： dd(Array) //dump + die 后面代码不会执行
+
+
+  
