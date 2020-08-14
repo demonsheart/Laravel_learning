@@ -51,18 +51,25 @@ Route::group(['prefix' => 'admin'], function () {
     });
 });
 
-//控制器路由方法
-Route::get('/home/test/test1', 'TestController@test1');
-Route::get('/home/test/test2', 'TestController@test2');
 
 //分目录管理
 Route::get('/home/index/index', 'Home\IndexController@index');
 Route::get('/admin/index/index', 'Admin\IndexController@index');
 
 //DB
-Route::group(['prefix' => 'home/test'], function () {
+Route::group(['prefix' => '/home/test'], function () {
     Route::get('add', 'TestController@add');
     Route::get('del', 'TestController@del');
     Route::get('update', 'TestController@update');
     Route::get('select', 'TestController@select');
+
+    Route::get('test1', 'TestController@test1');
+    Route::get('test2', 'TestController@test2');
+    Route::get('test3', 'TestController@test3');
+    Route::get('test4', 'TestController@test4');
+    Route::get('test5', 'TestController@test5');
+
+    //csrf验证
+    Route::get('test6', 'TestController@test6');
+    Route::post('test7', 'TestController@test7')->name('test7');
 });

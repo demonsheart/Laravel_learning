@@ -83,4 +83,42 @@ class TestController extends Controller
         $data = $db->limit(2)->offset(1)->get();
         dd($data);
     }
+    //view
+    public function test3()
+    {
+        // return view('home.test3');
+
+        $date = date('Y-m-d H:i:s', time());
+        $day = "日";
+        $time = strtotime('+1 year');
+        // return view('home.test3', [
+        //     'date' => $date,
+        //     'day' => $day
+        // ]);
+        return view('home.test3', compact('date', 'day', 'time'));
+    }
+    //foreach / if
+    public function test4()
+    {
+        $data = DB::table('member')->get();
+
+        $day = date('N');
+        //dd($data);
+        return view('home.test4', compact('data', 'day'));
+    }
+    //继承
+    public function test5()
+    {
+        return view('home.test5');
+    }
+    //csrf验证测试  基础表单
+    public function test6()
+    {
+        return view('home.test6');
+    }
+    //csrf验证测试  处理请求
+    public function test7()
+    {
+        return 'submit sucessfully';
+    }
 }

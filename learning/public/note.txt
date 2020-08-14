@@ -71,6 +71,7 @@ DB:
   $db = DB::table('表名'); //连接表
   插入：
         $db->insert(一维/二维数组);
+
   更新：
   $db->where('id', '=', '3')->update([ '列名' => '值']);
   $db->increment('列名',5);  //每次+5
@@ -104,4 +105,52 @@ DB:
   不影响记录语句：
   DB::select("SQL语句");
 
-  
+视图：(resources\views)
+  命名：后缀是 .blade.php
+
+  展示视图：return view('名称');
+
+  变量分配与展示： 
+  view(模板, 数组); //数组传递变量给.blade.php
+  .blade.php中 通过{{$键值}}访问
+
+  compact('变量名1','变量名2'...) //将变量打包成数组
+
+  视图中调用函数： {{ function($arg1,$arg2...) }}
+
+  视图中循环体写法：
+  @@foreach ($collection as $item)
+    code...
+  @endforeach
+
+  if写法：
+  @if()
+    code
+  @elseif()
+    code
+  @else()
+    code
+  @endif
+
+  视图继承
+  父： @yield('name') //占位符
+  子： @extends('home.parent') //继承模板
+       @section('name')  //绑定占位符
+          bodycode
+       @endsection
+
+  也可以引入： @include('home.parent')
+
+CSRF攻击：
+    laravel默认全局开启csrf验证机制
+    表单中应加上隐藏域：
+    <input type="hidden" name="_token" value="{{csrf_token()}}">
+    等价于 {{csrf_field()}}
+
+    csrf白名单：app\Http\Middleware\VerifyCsrfToken.php
+    将路由填进数组即可
+    如果填进 '*' 则全局禁用csrf验证 
+
+
+
+
