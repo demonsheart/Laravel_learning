@@ -65,5 +65,43 @@ php artisan serve 启动与Apache无关（不推荐）
 
 输出： dd(Array) //dump + die 后面代码不会执行
 
+DB:
+  use Illuminate\Support\Facades\DB;
+
+  $db = DB::table('表名'); //连接表
+  插入：
+        $db->insert(一维/二维数组);
+  更新：
+  $db->where('id', '=', '3')->update([ '列名' => '值']);
+  $db->increment('列名',5);  //每次+5
+  $db->decrement('列名',5);  //每次-5
+
+  查询：
+  $db -> where() -> where() -> where()...  and关系
+
+  $db -> where() -> orwhere() -> orwhere()...  or关系
+
+  $db -> where()... ->get(); //取出所有
+
+  $db -> where()... ->first(); //取出第一条
+
+  $db -> where() ->value('列名'); //取出一个字段
+
+  $db -> select('列名','列名') -> get(); //取出多个字段
+
+  $db -> orderby('列名','asc/desc') -> get(); //排序
+
+  $db -> limit(3) -> offset(2) -> get(); //分页
+        输出条数    初始输出位置
+
+  删除：
+  $db -> where().. -> delete(); //返回影响行数
+
+  使用SQL语句：
+  影响记录的语句(insert update delete)
+  DB::statement("SQL语句");
+
+  不影响记录语句：
+  DB::select("SQL语句");
 
   

@@ -59,3 +59,10 @@ Route::get('/home/test/test2', 'TestController@test2');
 Route::get('/home/index/index', 'Home\IndexController@index');
 Route::get('/admin/index/index', 'Admin\IndexController@index');
 
+//DB
+Route::group(['prefix' => 'home/test'], function () {
+    Route::get('add', 'TestController@add');
+    Route::get('del', 'TestController@del');
+    Route::get('update', 'TestController@update');
+    Route::get('select', 'TestController@select');
+});
