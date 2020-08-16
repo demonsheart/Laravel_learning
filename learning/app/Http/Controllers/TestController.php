@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 //引入DB
 use Illuminate\Support\Facades\DB;
+//引入模型
+use App\Home\Member;
 
 class TestController extends Controller
 {
@@ -120,5 +122,76 @@ class TestController extends Controller
     public function test7()
     {
         return 'submit sucessfully';
+    }
+    //模型 添加
+    public function test8(Request $request)
+    {
+        //实例化模型
+        $model = new Member();
+        //属性赋值
+        // $model -> name = 'kitty';
+        // $model -> age = '25';
+        // $model -> email = 'kitty@qq.com';
+        // //记录
+        // $model -> save();
+
+        //request
+        $model -> create($request -> all());
+    }
+    //查询
+    public function test9()
+    {
+        //主键为5
+        $data = Member::find(5); //返回的是对象
+        $data = Member::find(5) -> toArray(); //返回的是数组
+
+        $data = Member::where('id','>','3') -> get() -> toArray();
+        dd($data);
+    }
+    //修改
+    public function test10()
+    {
+        $model = new Member();
+        $model -> where('id','7') -> update(['age' => '26']);
+    }
+    public function test12()
+    {
+        return view('home.test12');
+    }
+    //自动验证
+    public function test13(Request $request)
+    {
+        if(Input::method() == 'POST')
+        {
+            //自动验证
+            $this -> validate($request,[
+                //具体规则
+                //字段 => 规则1|规则2|...
+                'name' => 'required|min:2|max:20',
+                'age'  => 'required|integer|min:1|max:100',
+                'email' => 'required|email'
+            ]);
+            //验证通过
+            echo '121212';
+        }
+        else
+        {
+            //展示视图
+            return view('home.test13');
+        }
+    }
+    //上传文件
+    public function test14()
+    {
+        if(Input::method() == 'POST')
+        {
+            //上传
+
+        }
+        else
+        {
+            //展示视图
+            
+        }
     }
 }

@@ -151,6 +151,95 @@ CSRF攻击：
     将路由填进数组即可
     如果填进 '*' 则全局禁用csrf验证 
 
+模型：app下
+  命名： 表名.php (建议) Member.php
+
+  创建模型： php artisan make:model Member
+
+  注意事项：
+  class Member extends Model
+  {
+    //定义关联的数据表 (必填)
+    protected $table = 'member';
+    //定义主键 (可选)
+    protected $primaryKey = 'id';
+    //定义禁止操作时间 (一般设置为false)
+    public $timestamps = false; // 注意public
+    //设置允许写入字段
+    protected $filltable = ['id','name','age','email'];
+  }
+
+  控制器引用模型
+  use App\Home\Member;
+
+  模型的使用：
+    方法一：像使用DB那样调用静态方法
+    Member::get()   ...
+    方法二：实例化模型再用
+    $model = new Member();
+    $model -> get();
+
+  AR模式：
+  必须实例化模型
+
+  1.添加数据 
+  方法一：
+    //实例化模型
+    public function test8()
+    {
+        //实例化模型
+        $model = new Member();
+        //属性赋值
+        $model -> name = 'kitty';
+        $model -> age = '25';
+        $model -> email = 'kitty@qq.com';
+        //记录
+        $model -> save();
+    }
+    手动添加赋值
+
+    方法二：
+    Request方法
+    public function test8(Request $request) //传入request
+    {
+        //实例化模型
+        $model = new Member();
+        //request
+        $model -> created($request -> all());
+    }
+    通过request方法获取表单(自己创建.blade.php)数据,再调用模型写入数据
+
+    2.查询操作
+    //主键为5
+    $data = Member::find(5); //返回的是对象
+    $data = Member::find(5) -> toArray(); //返回的是数组
+
+    $data = Member::where('id','>','3') -> get() -> toArray();
+    与前面的差不多
+
+    3.修改数据
+    方法一：AR模式 （查资料）比较麻烦不建议用
+
+    方法二：模型调用update方法
+      $model = new Member();
+      $model -> where('id','7') -> update(['age' => '26']);
+
+    4.删除
+    方法一：AR模式 （查资料）比较麻烦不建议用
+       
+    方法二：模型调用delete方法
+      $model = new Member();
+      $model ->  where().. -> delete();;
+
+自动验证：(https://learnku.com/docs/laravel/5.5/validation/1302)
+    Input::method(); 获取请求类型 (返回GET/POST)
+    请求字段(https://learnku.com/docs/laravel/5.5/validation/1302#rule-accepted)
+    (看案例)
+
+    语言：
+    装 ：composer require caouecs/laravel-lang:~3.0
+    将所需的复制在resources\lang
+    修改配置 app.php中locale
 
 
 

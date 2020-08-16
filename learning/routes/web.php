@@ -72,4 +72,15 @@ Route::group(['prefix' => '/home/test'], function () {
     //csrf验证
     Route::get('test6', 'TestController@test6');
     Route::post('test7', 'TestController@test7')->name('test7');
+
+    //模型
+    Route::any('test8', 'TestController@test8');
+    Route::get('test9', 'TestController@test9');
+    Route::get('test10', 'TestController@test10');
+    Route::get('test11', 'TestController@test11');
+    Route::get('test12', 'TestController@test12');
+    //自动验证 (二合一 自己提交给自己)
+    Route::any('test13', 'TestController@test13');
+    //上传
+    Route::any('test14','TestController@test14');
 });
